@@ -1,23 +1,11 @@
 services:
-  slurmctl:
-    image: ghcr.io/fasrc/slurmrest-container
-    hostname: slurmctl
-    container_name: slurmctl
-    volumes:
-      - share:/share
-    cap_add:
-      - sys_admin
-    tty: true          # -t   keep bash interactive
-    stdin_open: true   # -i   keep STDIN open
-    networks:
-      - compute
   coldfront:
-    image: ghcr.io/fasrc/coldfront-builder
+    image: ghcr.io/coldfront/coldfront
     command: ["serve"]
     hostname: coldfront
     container_name: coldfront-test
     volumes: 
-      - ./coldfront/slurm_rest_coldfront:/opt/slurmrest
+      - ./coldfront_plugin_slurmrest:/opt/slurmrest
       - share:/share
     expose:
       - "22"
@@ -30,8 +18,6 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
-      - ./database:/docker-entrypoint-initdb.d
-      - ./database:/etc/mysql/conf.d
       - var_lib_mysql:/var/lib/mysql
     expose:
       - "3306"

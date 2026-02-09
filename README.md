@@ -58,19 +58,3 @@ you would only set the "slurm\_cluster" resource attribute on the Slurm cluster
 resource and not on the partitions. Also, "slurm\_specs" resource attribute on
 partitions are merged with the allocation "slurm\_specs" and set on the Slurm
 account association instead of the cluster.
-
-## CLI Usage
-
-To check the consistency between ColdFront and Slurm run the following command:
-
-```
-    $ sacctmgr dump file=/output_dir/tux.cfg
-    $ coldfront slurm_check -i /output_dir/tux.cfg
-```
-
-This will compare active allocations in ColdFront to Slurm accounts and
-associations. Any differences in the Slurm association and ColdFront user lists
-will be reported. You can optionally provide the '--slurm-sync' flag to
-automatically add and remove Slurm associations to match the allocationuser lists
-in ColdFront, or the '--coldfront-sync' flag to automatically match the
-allocationuser lists to Slurm's associations.

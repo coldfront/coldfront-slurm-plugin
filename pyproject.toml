@@ -1,7 +1,7 @@
 [build-system]
 requires = [
     "setuptools>=42",
-    "git+https://github.com/fasrc/slurmrest_python_sdk.git",
+    "git+https://github.com/coldfront/slurm-python-sdk.git",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
