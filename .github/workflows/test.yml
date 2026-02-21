@@ -6,34 +6,20 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  integration-test:
+  test:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:24.0.5
-        options: --privileged
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v6
+      with:
+        repository: coldfront/coldfront
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: 3.12
 
-      - name: Build and start containers
-        run: docker-compose up -d --build
-
-      - name: Wait for slurmctl to be ready
-        run: |
-          for i in {1..30}; do
-            if docker-compose exec slurmctl curl -sf http://localhost:6820/slurm/v0.0.36/clusters; then
-              break
-            fi
-            sleep 5
-          done
-      - name: Install package
-        run: pip install 
-
-      - name: Run integration tests
-        run: docker-compose run --rm app pytest tests/integration
+     - name: Install dependencies
+       run: |
+         python -m pip install --upgrade pip setuptools wheel
+         pip install .

@@ -2,6 +2,7 @@
 requires = [
     "setuptools>=42",
     "git+https://github.com/coldfront/slurm-python-sdk.git",
+    "coldfront>=1.1.0",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
