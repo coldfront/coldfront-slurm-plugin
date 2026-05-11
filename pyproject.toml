@@ -5,12 +5,28 @@ build-backend = "hatchling.build"
 [project]
 name = "coldfront_plugin_slurmrest"
 version = "0.0.1"
+author = "Claire Peters"
+author_email = "clairepeters@g.harvard.edu"
+description = "Slurm REST API plugin for ColdFront"
+readme = "README.md"
 requires-python = ">=3.10"
 license = "GPL-3.0-or-later"
 dependencies = [
     "slurmrest_python",
     "coldfront>=1.1.0",
 ]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/coldfront/coldfront-slurm-plugin"
+Issues = "https://github.com/coldfront/coldfront-slurm-plugin/issues"
 
 [tool.uv.sources]
 slurmrest_python = { git = "https://github.com/coldfront/slurm-python-sdk.git" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/"]
